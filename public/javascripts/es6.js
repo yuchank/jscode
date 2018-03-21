@@ -64,3 +64,34 @@ var tahoe = {
 };
 
 tahoe.print();
+
+// destructuring assignment
+var sandwich = {
+  bread: 'dutch crunch',
+  meat: 'tuna',
+  cheese: 'swiss',
+  toppings: ['lettuce', 'tomato', 'mustard']
+};
+
+var {bread, meat} = sandwich;   // to be used locally
+console.log(bread, meat);       // dutch crunch tuna
+bread = 'garlic';
+meat = 'turkey';
+console.log(bread, meat);       // garlic turkey
+console.log(sandwich.bread, sandwich.meat);   // dutch crunch tuna
+
+var _lordify_ = ({firstName}) => {
+  console.log(`${firstName} of Canterbury`);
+};
+
+var regularPerson = {
+  firstName: 'Bill',
+  lastName: 'Wilson'
+};
+
+_lordify_(regularPerson);
+
+var [firstReort] = ['Kirkwood', 'Squaw', 'Alpine', 'Heavenly', 'Northstar'];
+console.log(firstReort);
+var [,,thirdReort] = ['Kirkwood', 'Squaw', 'Alpine', 'Heavenly', 'Northstar'];
+console.log(thirdReort);
