@@ -95,3 +95,67 @@ var [firstReort] = ['Kirkwood', 'Squaw', 'Alpine', 'Heavenly', 'Northstar'];
 console.log(firstReort);
 var [,,thirdReort] = ['Kirkwood', 'Squaw', 'Alpine', 'Heavenly', 'Northstar'];
 console.log(thirdReort);
+
+// object leteral enhancement
+var name = 'Tallac';
+var elevation = 9738;
+var print = function () {
+  console.log(`Mt. ${this.name} is ${this.elevation} feet tall`);
+}
+
+var funHike = { name, elevation, print };
+funHike.print();
+
+const skier = {
+  sound: '',
+  powderYell() {
+    let yell = this.sound.toUpperCase();
+    console.log(`${yell} ${yell} ${yell}!!!`);
+  },
+  speed(mph) {
+    this.sound = mph;
+    console.log('speed: ', mph);
+  }
+};
+
+// The spread operator
+// 1. combine the contents of arrays
+var peaks = ['Tallac', 'Ralston', 'Rose'];
+var canyons = ['Ward', 'Blackwood'];
+var combine = [...peaks, ...canyons];
+console.log(combine.join(', '));
+var [last] = [...peaks].reverse();
+console.log(last);
+console.log(peaks.join(', '));
+
+// 2. get some or the rest
+var lakes = ['Donner', 'Marlette', 'Fallen Leaf', 'Cascase'];
+var [first, ...rest] = lakes;
+console.log(rest.join(', '));
+
+// 3. collect function arguments
+function directions(...args) {
+  var [start, ...remaining] = args;
+  var [finish, ...stops] = remaining.reverse();
+
+  console.log(`drive through ${args.length} towns`);
+  console.log(`start in ${start}`);
+  console.log(`the destination is ${finish}`);
+  console.log(`stopping ${stops.length} times in between`);
+}
+
+directions('Truckee', 'Tahoe City', 'Sunnyside', 'Homewood', 'Tahoma');
+
+// 4. with objects
+var morning = {
+  breakfast: 'oatmeal',
+  lunch: 'peanut butter and jelly'
+};
+var dinner = 'mac and cheese';
+
+var backpackingMeals = {
+  ...morning,
+  dinner
+};
+
+console.log(backpackingMeals);
