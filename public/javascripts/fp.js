@@ -46,5 +46,68 @@ scream('functions can be returned from other functions');
 scream('createScream returns a function');
 scream('scream invokes that returned function');
 
+// imperative programming (명령형) how a task can be achieved? 
+// requires lots of comments 
+var string = 'This is the midday show with Cheryl Waters';
+var urlFriendly = '';
 
+for (let i = 0; i < string.length; i++) {
+  if (string[i] === '') {
+    urlFriendly += '-';
+  } 
+  else {
+    urlFriendly += string[i];
+  }
+}
 
+// declarative programming (선언형) describes what should happen
+// the details of how things happen are abstracted away
+var string_ = 'This is the midday show with Cheryl Waters';
+var urlFriendly_ = string_.replace(/ /g, '-');
+
+// immutability
+let color_lawn = {
+  title: 'lawn',
+  color: '#00ff00',
+  rating: 0
+};
+
+// harm the original data
+function rateColor(color, rating) {
+  color.rating = rating;
+  return color;
+}
+
+console.log(rateColor(color_lawn, 5).rating);   // 5
+console.log(color_lawn.rating);                 // 5
+
+// without having to change the original
+var _rateColor = function (color, rating) {
+  return Object.assign({}, color, { rating: rating });
+};
+const rateColor_ = (color, rating) => ({ ...color, rating });
+
+console.log(rateColor_(color_lawn, 4).rating);    // 4
+console.log(color_lawn.rating);                   // 5
+
+let list = [
+  { title: 'Rad Red'},
+  { title: 'Lawn'},
+  { title: 'Party Pink'}  
+];
+
+// not immutable function
+let addColor = function (title, colors) { 
+  colors.push({ title: title });
+  return colors;
+};
+
+console.log(addColor('Glam Green', list).length);   // 4
+console.log(list.length);                           // 4
+
+// immutable function, adds title to a copy of the original array
+const _addColor = (title, array) => array.concat({ title });
+const addColor_ = (title, list) => [...list, { title }];
+
+console.log(_addColor('Glam Green', list).length);    // 5
+console.log(list.length);                             // 4
