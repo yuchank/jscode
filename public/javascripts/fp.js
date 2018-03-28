@@ -111,3 +111,23 @@ const addColor_ = (title, list) => [...list, { title }];
 
 console.log(_addColor('Glam Green', list).length);    // 5
 console.log(list.length);                             // 4
+
+// pure function takes at least one argument and always return a value or another function.
+// do not cause side effects, set global variables or change anything about application state.
+// treats their arguments as immutable data. 
+const frederick = {
+  name: 'Frederick Douglass',
+  canRead: false,
+  canWrite: false
+};
+
+const selfEducate = person => ({
+  ...person,
+  canRead: true,
+  canWrite: true
+});
+
+console.log(selfEducate(frederick));  // true, true
+console.log(frederick);               // false, false
+
+const Header = (props) => <h1>{props.title}</h1>;
