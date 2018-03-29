@@ -130,4 +130,97 @@ const selfEducate = person => ({
 console.log(selfEducate(frederick));  // true, true
 console.log(frederick);               // false, false
 
-const Header = (props) => <h1>{props.title}</h1>;
+// const Header = (props) => <h1>{props.title}</h1>;
+
+// data transformations
+const schools = [
+  'Yorktown',
+  'Washington & Lee',
+  'Wakefield'
+];
+
+console.log(schools.join(', '));  // string
+const wSchools = schools.filter(school => school[0] === 'W');     // for every item in the array.
+console.log(wSchools);            // sub array 
+
+const cutSchool = (cut, list) => list.filter(school => school != cut);
+console.log(cutSchool('Washington & Lee', schools).join(' * '));  // string 'Yorktown & Wakefield'
+console.log(schools.join('\n'));
+
+const highSchools = schools.map(school => `${school} High School`);
+console.log(highSchools.join('\n'));
+console.log(schools.join('\n'));
+
+const _highSchools = schools.map(school => ({ name: school }));
+console.log(_highSchools);  // array of objects
+
+// change one object in an array of objects
+let _schools = [
+  { name: 'Yorktown' },
+  { name: 'Stratford' },
+  { name: 'Washington & Lee' },
+  { name: 'Wakefield' }
+];
+const editName = (oldName, name, arr) => arr.map(
+  item => item.name === oldName ? ({ ...item, name }) : item
+);
+let updatedSchools = editName('Stratford', 'HB Woodlawn', _schools);
+console.log(updatedSchools);    // array of objects
+
+const schools_ = {
+  'Yorktown': 10,
+  'Washington & Lee': 2,
+  'Wakefield': 5
+};
+console.log(Object.keys(schools_));   // array of keys from an object
+
+// array of objects from an object
+const schoolArray = Object.keys(schools_).map(key => ({
+  name: key, 
+  wins: schools_[key]
+}));
+console.log(schoolArray);
+
+// reduce
+const ages = [21, 18, 42, 40, 64, 63, 34];
+const maxAge = ages.reduce((max, v) => (v > max) ? v : max, 0);  // initial max value = 0
+console.log('maxAge', maxAge);
+const _maxAge = ages.reduceRight((max, v) => (v > max) ? v : max, 0);
+console.log('_maxAge', _maxAge);
+
+// array into an object
+const colors = [
+  {
+    id: `-xekare`,
+    title: `rad red`,
+    rating: 3
+  },
+  {
+    id: `-jbwsof`,
+    title: `big blue`,
+    rating: 2
+  },
+  {
+    id: `-prigbj`,
+    title: `grizzly grey`,
+    rating: 5
+  },
+  {
+    id: `-ryhbhsl`,
+    title: `banana`,
+    rating: 1
+  }
+];
+
+const hashColors = colors.reduce(
+  (hash, { id, title, rating }) => { 
+    hash[id] = { title, rating }; 
+    return hash;    // accumulate
+  }, {}             // empty object, initial value
+);
+console.log(hashColors);    // object
+
+// arrays into completely different arrays 
+const _colors = ['red', 'red', 'green', 'blue', 'green'];
+const distinctColors = _colors.reduce((distinct, color) => distinct.indexOf(color) !== -1 ? distinct : [...distinct, color], []);
+console.log(distinctColors);
