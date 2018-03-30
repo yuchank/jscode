@@ -224,3 +224,29 @@ console.log(hashColors);    // object
 const _colors = ['red', 'red', 'green', 'blue', 'green'];
 const distinctColors = _colors.reduce((distinct, color) => distinct.indexOf(color) !== -1 ? distinct : [...distinct, color], []);
 console.log(distinctColors);
+
+// higher-order functions
+const invokeIf = (condition, fnTrue, fnFalse) => condition ? fnTrue() : fnFalse();
+const showWelcome = _ => console.log('Welcome!!');
+const showUnauthorized = _ => console.log('Unauthorized!!');
+invokeIf(true, showWelcome, showUnauthorized);
+invokeIf(false, showWelcome, showUnauthorized);
+
+// currying
+const userLogs = userName => message => console.log(`${userName} -> ${message}`);
+const log = userLogs('grandpa23');
+log('attempted to load 20 fake members');
+
+const getFakeMembers = count => new Promise((resolves, rejects) => {
+  const api = `https://api.randomuser.me/?nat=US&results=${count}`;
+  const request = new XMLHttpRequest();
+  request.open('GET', api);
+  request.onload = () => (request.status === 200) ? resolves(JSON.parse(request.response).results) : rejects(Error(request.statusText));
+  request.onerror = (err) => rejects(err);
+  request.send();
+});
+
+getFakeMembers(20).then(
+  members => log(`successfully loaded ${members.length} members`),
+  error => log('encountered an error loading members')
+);
