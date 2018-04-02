@@ -250,3 +250,43 @@ getFakeMembers(20).then(
   members => log(`successfully loaded ${members.length} members`),
   error => log('encountered an error loading members')
 );
+
+// recursion
+const countdown = (value, fn, delay = 1000) => {
+  fn(value);
+  return value > 0 ? setTimeout(() => countdown(value - 1, fn), delay) : value;
+};
+
+countdown(10, value => console.log(value));
+
+var dan = {
+  type: 'person',
+  data: {
+    gender: 'male',
+    info: {
+      id: 22,
+      fullname: {
+        first: 'Dan',
+        last: 'Deacon'
+      }
+    }
+  }
+};
+
+const deepPick = (fields, object = {}) => {
+  const [first, ...remaining] = fields.split('.');
+  return remaining.length > 0 ? deepPick(remaining.join('.'), object[first]) : object[first];
+};
+
+console.log(deepPick('type', dan));
+console.log(deepPick('data.info.fullname.first', dan));
+console.log(dan['type'], dan['data']);
+
+// composition
+// chaining
+const template = "hh:mm:ss tt";
+const clockTime = template.replace("hh", "03").replace("mm", "33").replace("ss", "33").replace("tt", "PM");
+console.log(clockTime);
+console.log(template);
+
+const compose = (...fns) => args => fns.reduce((composed, f) => f(composed), args);
