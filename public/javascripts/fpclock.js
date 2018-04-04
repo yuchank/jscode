@@ -36,7 +36,7 @@ const prependZero = key => clockTime => ({
 const compose = (...fns) => args => fns.reduce((composed, f) => f(composed), args);
 
 const convertToCivilianTime = clockTime => compose(appendAMPM, civilianHours)(clockTime);
-const doubleDigits = civilianTime => compose(prependZero('hours'), prependZero('minutes', prependZero('seconds')))(civilianTime);
+const doubleDigits = civilianTime => compose(prependZero('hours'), prependZero('minutes'), prependZero('seconds'))(civilianTime);
 const startTicking = () => setInterval(compose(clear, getCurrentTime, serializeClockTime, convertToCivilianTime, doubleDigits, formatClock('hh:mm:ss tt'), display(log)), oneSecond());
 
 startTicking();
