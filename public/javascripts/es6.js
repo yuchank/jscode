@@ -23,6 +23,20 @@ var b = 'world';
 
 console.log(`${a} ${b}`);
 
+// tagged template literals
+var p = 5;
+var q = 10;
+function tag(strings, ...values) {
+  console.log(strings[0]);
+  console.log(strings[1]);
+  console.log(strings[2]);
+  console.log(values[0]);
+  console.log(values[1]);
+  return 'Bazinga!';
+}
+var bazinga = tag `Hello ${p + q} world ${p * q}`;
+console.log(bazinga);
+
 // default parameters
 function favoriteActivity(name = 'Shane McConkey', activity = 'skiing') {
   console.log(`${name} loves ${activity}`);
